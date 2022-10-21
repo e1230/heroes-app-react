@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-
+import "animate.css";
 export const HeroCard = ({ hero }) => {
   const heroImg = `/assets/heroes/${hero.id}.jpg`;
   return (
     <>
-      <div className="col">
+      <div className="col animate__animated animate__fadeIn">
         <div className="card">
           <div className="row no-gutters">
             <div className="col-4">

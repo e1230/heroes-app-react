@@ -1,9 +1,12 @@
+import { useMemo } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getHeroById } from "../helpers/getHeroById";
 
 export const HeroPage = () => {
+  //useMemo memorizar valores
+  //useCallback memorizar funciones
   const { id } = useParams();
-  const hero = getHeroById(id);
+  const hero = useMemo(() => getHeroById(id), [id]); //para no reescribirse
   const navigate = useNavigate();
   const onReturn = () => {
     navigate(-1);
@@ -15,7 +18,7 @@ export const HeroPage = () => {
         <img
           src={`/assets/heroes/${id}.jpg`}
           alt={hero.superhero}
-          className="img-thumbnail"
+          className="img-thumbnail animate__animated animate__fadeInLeft"
         />
       </div>
       <div className="col-8">
