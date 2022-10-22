@@ -14,7 +14,6 @@ export const SearchPage = () => {
   });
   const onSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchText.trim().length <= 1) return;
     navigate(`?q=${searchText.toLowerCase().trim()}`);
   };
   return (
@@ -42,10 +41,18 @@ export const SearchPage = () => {
         <div className="col-7">
           <h4>Results</h4>
           <hr />
-          <div className="alert alert-primary">Search a Hero</div>
-          <div className="alert alert-danger">
-            No results for <b>{q}</b>
-          </div>
+
+          {q === "" ? (
+            <div className="alert alert-primary animate__animated animate__fadeInLeft">
+              Search a Hero
+            </div>
+          ) : (
+            heroes.length === 0 && (
+              <div className="alert alert-danger animate__animated animate__fadeInLeft">
+                No results for <b>{q}</b>
+              </div>
+            )
+          )}
           {heroes.map((hero) => (
             <HeroCard key={hero.id} hero={hero} />
           ))}
