@@ -2,13 +2,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { HeroCard } from "../components/HeroCard";
 import { useForm } from "../hooks/useForm";
 import queryString from "query-string";
+import { getHeroesByName } from "../helpers/getHeroesByName";
 
 export const SearchPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { q = "" } = queryString.parse(location.search);
+  const heroes = getHeroesByName(q);
   const { searchText, onInputChange } = useForm({
-    searchText: "",
+    searchText: q,
   });
   const onSearchSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +46,9 @@ export const SearchPage = () => {
           <div className="alert alert-danger">
             No results for <b>{q}</b>
           </div>
-          {/* {<HeroCard />} */}
+          {heroes.map((hero) => (
+            <HeroCard key={hero.id} hero={hero} />
+          ))}
         </div>
       </div>
     </>
