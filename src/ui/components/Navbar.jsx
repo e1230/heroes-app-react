@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 export const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const onLogOut = () => {
+    logout();
     navigate("/login", {
       replace: true, //evita que el usuario regrese a la apgina anterior porque lo esta remplazando
     });
